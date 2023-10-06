@@ -14,8 +14,13 @@ const App = () => {
           setPacientes={setPacientes}
           pacientes={pacientes}
           paciente={paciente}
+          setPaciente={setPaciente}
         />
-        <ListadoPacientes pacientes={pacientes} setPaciente={setPaciente} />
+        <ListadoPacientes
+          pacientes={pacientes}
+          setPacientes={setPacientes}
+          setPaciente={setPaciente}
+        />
       </div>
     </div>
   );

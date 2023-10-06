@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-const Formulario = ({ setPacientes, pacientes, paciente }) => {
+const Formulario = ({ setPacientes, pacientes, paciente, setPaciente }) => {
   const [input, setInput] = useState({
     mascota: "",
     propietario: "",
@@ -52,9 +52,20 @@ const Formulario = ({ setPacientes, pacientes, paciente }) => {
         message: "Faltan campos",
       });
     } else {
-      const id = idGenerator();
-      const registro = { ...input, id };
-      setPacientes([...pacientes, registro]);
+      if (paciente.id) {
+        //editando
+        input.id = paciente.id;
+        const pacientesActualizados = pacientes.map((p) =>
+          p.id === paciente.id ? input : p
+        );
+        setPacientes(pacientesActualizados);
+        setPaciente({});
+      } else {
+        const id = idGenerator();
+        const registro = { ...input, id };
+        setPacientes([...pacientes, registro]);
+      }
+
       setInput({
         mascota: "",
         propietario: "",
