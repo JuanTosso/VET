@@ -1,10 +1,23 @@
-import header from "./components/Headers";
+import Formulario from "./components/Formulario";
+import Header from "./components/Headers";
+import ListadoPacientes from "./components/ListadoPacientes";
+import { useState } from "react";
 
 const App = () => {
+  const [pacientes, setPacientes] = useState([]);
+  const [paciente, setPaciente] = useState({});
   return (
-    <>
-      <h1 className="App">Hello World</h1>
-    </>
+    <div className="container mt-20 mx-auto w-11/12">
+      <Header />
+      <div className="mt-12 md:flex">
+        <Formulario
+          setPacientes={setPacientes}
+          pacientes={pacientes}
+          paciente={paciente}
+        />
+        <ListadoPacientes pacientes={pacientes} setPaciente={setPaciente} />
+      </div>
+    </div>
   );
 };
 
