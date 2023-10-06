@@ -1,11 +1,25 @@
 import Formulario from "./components/Formulario";
 import Header from "./components/Headers";
 import ListadoPacientes from "./components/ListadoPacientes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
   const [pacientes, setPacientes] = useState([]);
   const [paciente, setPaciente] = useState({});
+
+  useEffect(() => {
+    const obtenerLS = () => {
+      const pacientesLS = JSON.parse(localStorage.getItem("pacientes")) ?? [];
+      console.log(pacientesLS);
+      setPacientes(pacientesLS);
+    };
+    obtenerLS();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("pacientes", JSON.stringify(pacientes));
+  }, [pacientes]);
+
   return (
     <div className="container mt-20 mx-auto w-11/12">
       <Header />
